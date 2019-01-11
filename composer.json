@@ -1,0 +1,22 @@
+{
+    "name": "brezgalov/gmaps-api-client",
+    "description": "Google maps api client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oleg Brezgalov",
+            "email": "oleg.brezgalov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-curl": "*",
+        "brezgalov/api-wrapper": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "brezgalov\\GmapsApiClient\\": "src/"
+        }
+    }
+}
