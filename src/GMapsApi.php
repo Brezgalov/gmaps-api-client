@@ -4,6 +4,8 @@ namespace brezgalov\GmapsApiClient;
 
 use brezgalov\ApiWrapper\Client;
 use brezgalov\ApiWrapper\Response;
+use Brezgalov\IPoint\IPoint;
+use Brezgalov\IPoint\Point;
 
 class GMapsApi extends Client
 {
@@ -66,17 +68,17 @@ class GMapsApi extends Client
 
     /**
      * Find distance between 2 points
-     * @param Point $from
-     * @param Point $to
+     * @param IPoint $from
+     * @param IPoint $to
      * @return Response
      * @throws \Exception
      */
-    public function getDistance(Point $from, Point $to)
+    public function getDistance(IPoint $from, IPoint $to)
     {
         $result = $this->prepareRequest('/distancematrix/json')
             ->setQueryParams([
-                'origins'                       =>  $from->lat . ',' . $from->lon,
-                'destinations'                  =>  $to->lat . ',' . $to->lon,
+                'origins'                       =>  $from->getLat() . ',' . $from->getLon(),
+                'destinations'                  =>  $to->getLat() . ',' . $to->getLon(),
                 'transit_routing_preference'    =>  'less_walking',
                 'key'                           =>  $this->token,
             ])
@@ -96,16 +98,15 @@ class GMapsApi extends Client
     }
 
     /**
-     * Get info about point
-     * @param Point $point
+     * @param IPoint $point
      * @return Response
      * @throws \Exception
      */
-    public function getPointInfo(Point $point)
+    public function getPointInfo(IPoint $point)
     {
         $result = $this->prepareRequest('/geocode/json')
             ->setQueryParams([
-                'latlng' => $point->lat . ', ' . $point->lon,
+                'latlng' => $point->getLat() . ', ' . $point->getLon(),
                 'key' => $this->token,
             ])
             ->execJson()
@@ -115,4 +116,9 @@ class GMapsApi extends Client
 
         return $result;
     }
+
+    /*public function getRoute(IPoint $point1, IPoint $point2)
+    {
+
+    }*/
 }
