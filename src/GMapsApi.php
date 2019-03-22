@@ -130,8 +130,9 @@ class GMapsApi extends Client
     {
         $result = $this->prepareRequest('/directions/json')
             ->setQueryParams([
-                'origin' => $point1->getLat() . ',' . $point1->getLon() . '|' . $point2->getLat() . ',' . $point2->getLon(),
-                'key' => $this->token,
+                'origin'        => $point1->getLat() . ',' . $point1->getLon(),
+                'destination'   => $point2->getLat() . ',' . $point2->getLon(),
+                'key'           => $this->token,
             ])
             ->execJson()
         ;
