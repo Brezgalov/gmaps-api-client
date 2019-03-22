@@ -23,14 +23,17 @@ class GMapsApi extends Client
      */
     protected function validateResponse(Response $resp)
     {
-        if (array_key_exists('error_message', $resp->data) && !empty($resp->data['error_message'])) {
-            $resp->addError($resp->data['error_message']);
+        if (@$resp->data['status'] === 'ZERO_RESULTS') {
+            $resp->data = [];
+            return;
+        }
+
+        $errMsg = @$resp->data['error_message'];
+        if (!empty($errMsg)) {
+            $resp->addError($errMsg);
         }
         if (@$resp->data['status'] !== 'OK') {
             $resp->addError('Status is not OK: ' . $resp->data['status']);
-        }
-        if (@$resp->data['status'] === 'ZERO_RESULTS') {
-            $resp->data = [];
         }
     }
 
