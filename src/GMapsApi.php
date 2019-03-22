@@ -1,9 +1,9 @@
 <?php
 
-namespace brezgalov\GmapsApiClient;
+namespace Brezgalov\GmapsApiClient;
 
-use brezgalov\ApiWrapper\Client;
-use brezgalov\ApiWrapper\Response;
+use Brezgalov\ApiWrapper\Client;
+use Brezgalov\ApiWrapper\Response;
 use Brezgalov\IPoint\IPoint;
 use Brezgalov\IPoint\Point;
 
