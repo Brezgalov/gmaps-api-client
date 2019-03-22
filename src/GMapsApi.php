@@ -117,8 +117,24 @@ class GMapsApi extends Client
         return $result;
     }
 
-    /*public function getRoute(IPoint $point1, IPoint $point2)
+    /**
+     * @param IPoint $point1
+     * @param IPoint $point2
+     * @return Response
+     * @throws \Exception
+     */
+    public function getDirections(IPoint $point1, IPoint $point2)
     {
+        $result = $this->prepareRequest('/directions/json')
+            ->setQueryParams([
+                'origin' => $point1->getLat() . ',' . $point1->getLon() . '|' . $point2->getLat() . ',' . $point2->getLon(),
+                'key' => $this->token,
+            ])
+            ->execJson()
+        ;
 
-    }*/
+        $this->validateResponse($result);
+
+        return $result;
+    }
 }
