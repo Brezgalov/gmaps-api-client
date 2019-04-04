@@ -121,17 +121,17 @@ class GMapsApi extends Client
     }
 
     /**
-     * @param IPoint $point1
-     * @param IPoint $point2
+     * @param IPoint $from
+     * @param IPoint $to
      * @return Response
      * @throws \Exception
      */
-    public function getDirections(IPoint $point1, IPoint $point2)
+    public function getDirections(IPoint $from, IPoint $to)
     {
         $result = $this->prepareRequest('/directions/json')
             ->setQueryParams([
-                'origin'        => $point1->getLat() . ',' . $point1->getLon(),
-                'destination'   => $point2->getLat() . ',' . $point2->getLon(),
+                'origin'        => $from->getLat() . ',' . $from->getLon(),
+                'destination'   => $to->getLat() . ',' . $to->getLon(),
                 'key'           => $this->token,
             ])
             ->execJson()
