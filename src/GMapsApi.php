@@ -57,12 +57,14 @@ class GMapsApi extends Client
         //handle response
         $this->validateResponse($result);
         if ($result->isSuccessful()) {
-            $lat = @$result->data['results'][0]['geometry']['location']['lat'];
-            $lon = @$result->data['results'][0]['geometry']['location']['lng'];
-            if ($lat === null && $lon === null) {
+            $data = [
+                'lat' => @$result->data['results'][0]['geometry']['location']['lat'],
+                'lon' => @$result->data['results'][0]['geometry']['location']['lng'],
+            ];
+            if ($data['lat'] === null && $data['lon'] === null) {
                 $result->addError('Could not fetch coords from response');
             } else {
-                $result->data = new Point($lat, $lon);
+                $result->data = new Point($data);
             }
         }
 
